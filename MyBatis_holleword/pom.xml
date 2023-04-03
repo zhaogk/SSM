@@ -19,7 +19,10 @@
             </plugin>
         </plugins>
     </build>
-    <packaging>jar</packaging>
+    <modules>
+        <module>mybatis_resultMap</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <dependencies>
     <!-- Mybatis核心 -->

@@ -15,4 +15,24 @@
         <!--   select * from t_user where username = #{param1} and password = #{param2}-->
         select * from t_user where username = '${param1}' and password = '${param2}';
     </select>
+
+
+<!--    User chekLoginByMap(Map<String,Object> map);-->
+    <select id="chekLoginByMap" resultType="user">
+        select *
+        from t_user where username=#{username}  and password =#{password} ;
+    </select>
+
+
+<!--    void insertUser(User user);-->
+    <insert id="insertUser">
+        insert into t_user value (null ,#{username},#{password},#{age},#{gender},#{email});
+    </insert>
+
+<!--    User checkLoginByParam(@Param("username") String username, @Param("password") String password);-->
+    <select id="checkLoginByParam" resultType="user">
+        select *
+        from t_user where username=#{username} and password=#{password};
+    </select>
 </mapper>
+

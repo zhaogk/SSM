@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+    <!--设置连接数据库的环境-->
+    <!--
+    environments：配置链接数据库环境
+    default:设置默认使用的环境id
+       -->
+    <properties resource="jdbc.properties"/>
+    <settings>
+<!--        将下划线映射为驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!--    引入properties文件，此后就可以在文件中使用的方式访问value-->
+    <typeAliases>
+        <!--
+        typeAlias：设置某个类型的别名
+        属性：
+        type：设置需要设置别名的类型
+        alias：设置某个类型的别名，若不设置该属性，那么该类型拥有默认的别名，即类名
+        且不区分大小写
+        -->
+        <!--<typeAlias type="com.atguigu.mybatis.pojo.User"></typeAlias>-->
+        <!--以包为单位，将包下所有的类型设置默认的类型别名，即类名且不区分大小写-->
+        <package name="com.atguigu.mybatis.pojo"/>
+    </typeAliases>
+    <environments default="development">
+        <!--
+        environment：设置一个具体的链接数据库的环境，id唯一
+        -->
+        <environment id="development">
+            <!--
+            transactionManager：设置事物管理器，
+            type：设置管理方式
+            JDBC：表示使用jdbc中原生的事物管理方式
+            manageo：被管理
+            -->
+            <transactionManager type="JDBC"/>
+            <!--
+            dataSource：设置数据源
+            type：设置数据源的类型
+            POOLED：表示使用数据库链接池
+            UNPOOLED：表示不使用数据库连接池
+            JNDI：表示使用上下文的数据源
+            -->
+            <dataSource type="POOLED">
+                <!--设置连接数据库的驱动-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <!--设置连接数据库的连接地址-->
+                <property name="url" value="${jdbc.url}"/>
+                <!--设置连接数据库的用户名-->
+                <property name="username" value="${jdbc.username}"/>
+                <!--设置连接数据库的密码-->
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <mappers>
+        <package name="com.atguigu.mybatis.mapper"/>
+    </mappers>
+
+</configuration>
